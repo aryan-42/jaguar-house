@@ -1,0 +1,47 @@
+Original prompt: i want to change our brand to Jaguar and use this design for the landing page with jaguar
+
+2026-03-17
+- Started Jaguar rebrand implementation.
+- Confirmed current app still carries BMW/campus naming across landing, HUD, module copy, metadata, and admin descriptive text.
+- Confirmed reference video direction: floating browser-card structure, rounded shell, slim nav, hero car moment, short-scroll marketing sections.
+- Chosen implementation direction:
+  - Full user-facing Jaguar rebrand
+  - Dark editorial styling
+  - Short-scroll landing page
+  - Placeholder-first asset strategy
+  - Current 3D car reused temporarily for hero media
+  - Backend/env/storage identifiers remain unchanged
+- Added a shared `brandTheme` config with Jaguar copy, palette, nav items, CTA labels, and asset slots.
+- Swapped body typography from Exo 2 to Manrope and changed global theme tokens from blue/cyan to Jaguar-style green/ivory/champagne tones.
+- Rebuilt the landing page as a floating editorial shell with:
+  - slim top bar and Jaguar wordmark fallback
+  - temporary 3D hero vehicle stage
+  - metrics strip
+  - Jaguar House positioning cards
+  - six-destination route preview
+  - integrated resume/launch CTA section
+- Swept major visible copy across form, drive stage, completion, admin, team personalization, and module labels toward Jaguar House terminology.
+- Validation:
+  - `npm run build` passes
+  - `npm run typecheck` passes after rebuilding `.next/types`
+  - Browser smoke check on the production server passed
+  - Full-page screenshots were reviewed at desktop, ~1024px, and 390px widths
+  - A missing favicon caused the only browser console error; fixed by adding a temporary neutral `app/icon.svg`
+- Jaguar asset pass:
+  - Added supplied Jaguar F-Type Convertible asset pack for landing hero media.
+  - Added supplied 2016 Jaguar F-Type SVR Coupe asset pack for gameplay vehicle media.
+  - Updated the shared vehicle config to use separate showcase and drive model URLs.
+  - Replaced the fallback wordmark slot with a served Jaguar wordmark SVG asset.
+  - Updated gameplay rig logic to animate all four wheel nodes on the SVR coupe instead of a single wheel per axle.
+- Gameplay Jaguar visibility pass:
+  - Inspected the drive coupe GLTF bounds directly and confirmed the model already sits near ground level (`min.y ~= 0.0012`), while the old gameplay normalization was still applying a large extra ground offset.
+  - Moved vehicle fit values into `brandTheme.assets.vehiclePrimary.showcaseFit` and `driveFit` so landing and gameplay assets can be tuned independently.
+  - Updated the gameplay Jaguar coupe fit to use a grounded setup (`groundOffset: 0`, `bodyOffsetY: 0`) and a larger target length for a more believable on-road presence.
+- Drive HUD reduction pass:
+  - Added a compact default HUD layout with smaller mission/profile/checkpoint cards.
+  - Added a minimized HUD mode with a slim route bar and quick actions.
+  - Added `Minimize HUD` / `Expand HUD` and `Home` actions while driving.
+  - Kept existing session/audio actions, but trimmed them for the new compact layout.
+- Validation:
+  - `npm run build` passes.
+  - `npm run typecheck` passes after the build regenerated `.next/types`.
